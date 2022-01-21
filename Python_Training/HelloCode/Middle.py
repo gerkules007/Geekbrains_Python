@@ -46,7 +46,7 @@ def interface(number_of_task):
     task_start_list = {
     23: [1, 'Введите число n'],
     25: [1, 'Введите число a'],
-    27: ['str', 'Введите число, которое нужно проверить'],
+    27: [1.1, 'Введите число, которое нужно проверить'],
     }
 
     input_value = []
@@ -76,8 +76,9 @@ def sum_cow(number):
 # 27 Определить количество цифр в числе
 
 def count_numeric_in_number(number):
+    numb_str = str(number)
     count = 0
-    for s in number:
+    for s in numb_str:
         if not (s == '-' or s == '.'):
             count += 1
     return count
