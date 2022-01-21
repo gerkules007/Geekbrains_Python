@@ -22,11 +22,11 @@ def check_input_data(data):
     return input_type
 
 def call_program(task, value_list):
-    print(task)
     call = {
         23: degree_n,
         25: sum_cow,
         27: count_numeric_in_number,
+        29: multiply_cow
     }
     print(call[task](value_list))
 
@@ -47,6 +47,7 @@ def interface(number_of_task):
     23: [1, 'Введите число n'],
     25: [1, 'Введите число a'],
     27: [1.1, 'Введите число, которое нужно проверить'],
+    29: [1, 'Введите число n'],
     }
 
     input_value = []
@@ -83,6 +84,14 @@ def count_numeric_in_number(number):
             count += 1
     return count
 
+# 29 Написать программу вычисления произведения чисел от 1 до N
+
+def multiply_cow(number):
+    multi = 1
+    for i in range(1, number + 1):
+        multi *= i
+    return multi
+
 
 change = [1, 'Введите номер задания: ']
-interface(27)
+interface(29)
