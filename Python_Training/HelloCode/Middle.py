@@ -21,29 +21,67 @@ def check_input_data(data):
                 print('Unindentify type')
     return input_type
 
-# def input_list_interger(count):
-#     list = []
-#     for i in range(1, count + 1):
-#         list.append(input_data_interger(i))
-#     return list
-
-# input_list = input_list_interger(3)
-def interface(number_of_task):
-    formats_of_data = {
-        'int' : 1,
-        'float' : 1.1,
-        'str': 'str'
+def call_program(task, value_list):
+    print(task)
+    call = {
+        23: degree_n,
+        25: sum_cow,
+        27: count_numeric_in_number,
     }
+    print(call[task](value_list))
 
-    task_list = {
-        23: [formats_of_data['int'], 'Введите число n']
-        }
+def interface(number_of_task):
+    
+    # formats_of_data = {
+    #     'int' : 1,
+    #     'float' : 1.1,
+    #     'str': 'str'
+    # }
+    
+    # for x in formats_of_data:
+    #     for i in task_start_list:
+    #         task_start_list[i][0] = formats_of_data[x]
+    # print(task_start_list)
+
+    task_start_list = {
+    23: [1, 'Введите число n'],
+    25: [1, 'Введите число a'],
+    27: ['str', 'Введите число, которое нужно проверить'],
+    }
 
     input_value = []
     try:
-        input_value = input_data(task_list[number_of_task])
+        input_value = input_data(task_start_list[number_of_task])
     except KeyboardInterrupt:
         exit()
-    
+    call_program(number_of_task, input_value)
 
-interface(23)
+
+# 23 Задача Показать таблицу квадратов чисел от 1 до N
+
+def degree_n(number):
+    nw = []
+    for i in range(1, number + 1):
+        nw.append(i**2)
+    return nw
+
+# 25 Найти сумму чисел от 1 до А
+
+def sum_cow(number):
+    sum = 0
+    for i in range(1, number + 1):
+        sum += i
+    return sum
+
+# 27 Определить количество цифр в числе
+
+def count_numeric_in_number(number):
+    count = 0
+    for s in number:
+        if not (s == '-' or s == '.'):
+            count += 1
+    return count
+
+
+change = [1, 'Введите номер задания: ']
+interface(27)
