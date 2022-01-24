@@ -34,6 +34,16 @@ def its_sqrt(list):
     s = list[1]
     return s == n*n
 
+# 18 Проверить истинность утверждения ¬(X ⋁ Y) = ¬X ⋀ ¬Y
+
+def its_true(list):
+    check = []
+    for x in False, True:
+        for y in False, True:
+            check.append(not (x or y) == (not x and not y))
+    return check
+    
+
 # 19 Определить номер четверти плоскости, в которой находится точка с координатами Х и У, причем X ≠ 0 и Y ≠ 0
 
 def numb_of_quater(list):
@@ -49,7 +59,18 @@ def numb_of_quater(list):
         (x > 0 and y < 0): '4'
     }[True]
 
-#21 Программа проверяет пятизначное число на палиндромом.
+# 20 Задать номер четверти, показать диапазоны для возможных координат
+
+def quater_info(list):
+    quat = {
+        1: 'x > 0 and y > 0',
+        2: 'x < 0 and y > 0',
+        3: 'x < 0 and y < 0',
+        4: 'x > 0 and y < 0)',
+    }
+    return quat[list[0]]
+
+# 21 Программа проверяет пятизначное число на палиндромом.
 
 def palindrom(list):
     n = str(list)
@@ -66,6 +87,8 @@ def palindrom(list):
         i += 1
     return result
 
+# 22 Найти расстояние между точками в пространстве 2D/3D
 
 
-print(palindrom(-53135.15))
+
+print(its_true(input_list))
