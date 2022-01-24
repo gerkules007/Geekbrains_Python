@@ -26,8 +26,11 @@ def call_program(task, value_list):
         23: degree_n,
         24: cub_number,
         25: sum_cow,
+        26: get_number_to_interger_pow,
         27: count_numeric_in_number,
-        29: multiply_cow
+        28: sum_in_numb,
+        29: multiply_cow,
+        30: cub_even_numbers,
     }
     print(call[task](value_list))
 
@@ -37,8 +40,11 @@ def interface(number_of_task):
     23: [1, 'Введите число n'],
     24: [1, 'Введите число n'],
     25: [1, 'Введите число a'],
+    26: [1, 'Введите число a', 'Введите число n'],
     27: [1.1, 'Введите число, которое нужно проверить'],
+    28: ['str', 'Введите число n'],
     29: [1, 'Введите число n'],
+    30: [1, 'Введите сколько чисел нужно для возведения в куб'],
     }
 
     input_value = []
@@ -71,7 +77,7 @@ def sum_cow(number):
 
 # 26 Возведите число А в натуральную степень B используя цикл
 
-def get_number(number):
+def get_number_to_interger_pow(number):
     temp = 1
     a = number[0]
     for n in range(number[1]):
@@ -108,8 +114,7 @@ def multiply_cow(number):
 # 30 Показать кубы чисел, заканчивающихся на четную цифру
 
 def cub_even_numbers(number):
-    return [n**3 for n in number if n%2 == 0]
+    return [n**3 for n in range(number) if n%2 == 0]
 
-change = [1, 'Введите номер задания: ']
-interface(24)
 
+interface(input_data([1, 'Введите номер задания: ']))
