@@ -24,6 +24,7 @@ def check_input_data(data):
 def call_program(task, value_list):
     call = {
         23: degree_n,
+        24: cub_number,
         25: sum_cow,
         27: count_numeric_in_number,
         29: multiply_cow
@@ -31,20 +32,10 @@ def call_program(task, value_list):
     print(call[task](value_list))
 
 def interface(number_of_task):
-    
-    # formats_of_data = {
-    #     'int' : 1,
-    #     'float' : 1.1,
-    #     'str': 'str'
-    # }
-    
-    # for x in formats_of_data:
-    #     for i in task_start_list:
-    #         task_start_list[i][0] = formats_of_data[x]
-    # print(task_start_list)
 
     task_start_list = {
     23: [1, 'Введите число n'],
+    24: [1, 'Введите число n'],
     25: [1, 'Введите число a'],
     27: [1.1, 'Введите число, которое нужно проверить'],
     29: [1, 'Введите число n'],
@@ -57,7 +48,6 @@ def interface(number_of_task):
         exit()
     call_program(number_of_task, input_value)
 
-
 # 23 Задача Показать таблицу квадратов чисел от 1 до N
 
 def degree_n(number):
@@ -66,6 +56,11 @@ def degree_n(number):
         nw.append(i**2)
     return nw
 
+# 24 Найти кубы чисел от 1 до N
+
+def cub_number(number):
+    return [n**3 for n in range(1, number + 1)]
+
 # 25 Найти сумму чисел от 1 до А
 
 def sum_cow(number):
@@ -73,6 +68,15 @@ def sum_cow(number):
     for i in range(1, number + 1):
         sum += i
     return sum
+
+# 26 Возведите число А в натуральную степень B используя цикл
+
+def get_number(number):
+    temp = 1
+    a = number[0]
+    for n in range(number[1]):
+        temp *= a
+    return temp
 
 # 27 Определить количество цифр в числе
 
@@ -84,6 +88,15 @@ def count_numeric_in_number(number):
             count += 1
     return count
 
+# 28 Подсчитать сумму цифр в числе
+
+def sum_in_numb(number):
+    new_numb = 0
+    for i in number:
+        if not (i == '-' or i == '.'):
+            new_numb += int(i)
+    return new_numb
+
 # 29 Написать программу вычисления произведения чисел от 1 до N
 
 def multiply_cow(number):
@@ -92,6 +105,11 @@ def multiply_cow(number):
         multi *= i
     return multi
 
+# 30 Показать кубы чисел, заканчивающихся на четную цифру
+
+def cub_even_numbers(number):
+    return [n**3 for n in number if n%2 == 0]
 
 change = [1, 'Введите номер задания: ']
-interface(29)
+interface(24)
+
