@@ -147,3 +147,5 @@ open(directory, mode) - открывает файл директории
 random
 
     random.shuffle() - перемешать список
+    
+`xrange()` - при больших диапазаонах чисел
