@@ -79,8 +79,10 @@ def square_equation_library(n):
     return (x1, x2)
 
 # 30 Вычислить число pi c заданной точностью d
+# был вариант math.pi // n * n, но не давал точного знака при умножении n
 def pi_number(n):
-    return math.pi // n * n
+    x = abs(int(math.log10(n)))
+    return round(math.pi, x)
 
 
 def call_program(task, value_list):
@@ -104,4 +106,4 @@ def call_program(task, value_list):
 a = [[4,5,7], 4]
 b = [1,2,3,4,5,6,7]
 c = [1.1, 1.01, 1.001]
-call_program(30, 0.000001)
+call_program(30, 0.00000001)
