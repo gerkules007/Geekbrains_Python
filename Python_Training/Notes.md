@@ -143,3 +143,7 @@ open(directory, mode) - открывает файл директории
 Зарегистрировать функцию как обработчик
 
     @bot.message_handler(content_types=["text"])
+    
+random
+
+    random.shuffle() - перемешать список
