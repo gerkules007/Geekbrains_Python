@@ -3,7 +3,7 @@ from cmath import sqrt
 import math
 # 11 Для натурального N создать множество: 1, -3, 9, -27, 81 и т.д.
 def crt_arr_base_on_three(n):
-    new_arr = []
+    return [(-3)**i for i in range(n+1)]
 
 # 12 Для натурального N создать словарь индекс-значение, состоящий из элементов последовательности 3k + 1.
 def crt_dic_with_N(n):
@@ -85,6 +85,7 @@ def pi_number(n):
 
 def call_program(task, value_list):
     call = {
+        11: crt_arr_base_on_three,
         12: crt_dic_with_N,
         14: sum_of_real_numb,
         16: crt_dic_with_N2,
@@ -103,4 +104,4 @@ def call_program(task, value_list):
 a = [[4,5,7], 4]
 b = [1,2,3,4,5,6,7]
 c = [1.1, 1.01, 1.001]
-call_program(30, 0.001)
+call_program(30, 0.000001)
