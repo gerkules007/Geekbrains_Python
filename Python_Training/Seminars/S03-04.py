@@ -34,7 +34,11 @@ def crt_dic_with_N2(n):
 # 17 Задать список из N элементов, заполненных числами из [-N, N]. 
 # Найти произведение элементов на указанных позициях. 
 # Позиции хранятся в файле file.txt в одной строке одно число
-
+def multipy_numbers_setup_from_file(n, splitter = ',', m = 1):
+    a = [i for i in range(-n, n+1)]
+    b = list(map(lambda x: int(x), open(r"Python_Training\\Seminars\\xfile.txt").read().split(splitter)))
+    for i in b: m *= a[i]
+    return m
 
 # 18 Реализовать алгоритм перемешивания списка. 
 def shake_list1(n):
@@ -72,7 +76,6 @@ def sum_not_even_numbers(n):
 # Пример: [2, 3, 4, 5, 6] => [12, 15, 16]; [2, 3, 5, 6] => [12, 15] 
 def palidrom_multiply(n):
     return [n[i]*n[-i-1] for i in range((len(n)+1)//2)]
-
 
 # 24 В заданном списке вещественных чисел найдите разницу между максимальным и минимальным значением дробной части элементов. Пример: [1.1, 1.2, 3.1, 5, 10.01] => 0.19
 def find_min_real_after_dot(n):
@@ -138,6 +141,7 @@ def call_program(task, value_list):
         14: sum_of_real_numb,
         15: fill_miltiple,
         16: crt_dic_with_N2,
+        17: multipy_numbers_setup_from_file,
         18: shake_list1,
         18.1: shake_list2,
         19: randomize_it,
@@ -161,4 +165,4 @@ c = [1.1, 1.01, 1.001]
 v13 = ["25,17,31,25", '31']
 v24 = [1.1, 1.2, 3.1, 5, 10.01]
 v28 = [1, -2, 3]
-call_program(28, v28)
+call_program(17, 5)
