@@ -17,12 +17,7 @@ def count_string_values(n):
 
 # 14  Подсчитать сумму цифр в вещественном числе.
 def sum_of_real_numb(n):
-    numb_str = str(n)
-    sum = 0
-    for s in numb_str:
-        if not (s == '-' or s == '.'):
-            sum += int(s)
-    return sum
+    return sum([int(i) for i in str(n) if not (i == '-' or i == '.')])
 
 # 15 Написать программу получающую набор произведений чисел от 1 до N. 
 #    Пример: пусть N = 4, тогда [ 1, 2, 6, 24 ]
@@ -160,4 +155,4 @@ b = [1,2,3,4,5,6,7]
 c = [1.1, 1.01, 1.001]
 v13 = ["25,17,31,25", '31']
 v24 = [1.1, 1.2, 3.1, 5, 10.01]
-call_program(24, v24)
+call_program(14, -11111.11111)
