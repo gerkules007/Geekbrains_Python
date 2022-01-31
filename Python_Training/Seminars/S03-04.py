@@ -10,7 +10,10 @@ def crt_arr_base_on_three(n):
 def crt_dic_with_N(n):
     return {i: 3*i + 1 for i in range(1, n)}
 
-# 13 Пользователь задаёт две строки. Определить количество количество вхождений одной строки в другой.
+# 13 Пользователь задаёт две строки. Определить количество вхождений одной строки в другой.
+def count_string_values(n):
+    s, f = n[0], n[1]
+    return s.count(f)
 
 # 14  Подсчитать сумму цифр в вещественном числе.
 def sum_of_real_numb(n):
@@ -23,7 +26,6 @@ def sum_of_real_numb(n):
 
 # 15 Написать программу получающую набор произведений чисел от 1 до N. 
 #    Пример: пусть N = 4, тогда [ 1, 2, 6, 24 ]
-#    К: при N = 100 данный метод считает молниеностно 
 def set_of_multiple(n):
     return 1 if n == 1 else set_of_multiple(n-1)*n
 
@@ -59,11 +61,12 @@ def randomize_it(n):
     return
 
 # 20 Определить, присутствует ли в заданном списке строк, некоторое число
-# (использовать аргумент 'а')
+# (использовать переменную 'а')
 def find_number(n): return n[1] in n[0]
 
 # 21 Определить, позицию второго вхождения строки в списке либо сообщить, что его нет.
-# print(s[s.index('\n') + 1:])
+# def find_string_element(n):
+#     return (n[n.index('\n') + 1:])
 
 # 22 Найти сумму чисел списка стоящих на нечетной позиции
 def sum_not_even_numbers(n): 
@@ -77,8 +80,8 @@ def palidrom_multiply(n):
 
 # 24 В заданном списке вещественных чисел найдите разницу между максимальным и минимальным значением дробной части элементов. Пример: [1.1, 1.2, 3.1, 5, 10.01] => 0.19
 def find_min_real_after_dot(n):
-    a = [ round( i%1 , 7) for i in n ]
-    return max(a) - min(a)
+    a = [ i%1 for i in n if i%1 != 0 ]
+    return round(max(a) - min(a), 15)
 
 # 25 Написать программу преобразования десятичного числа в двоичное
 def binary_parse(n, bit_len = 8, b = ''):
@@ -105,9 +108,7 @@ def min_max_string(n, splitter = ','):
 # в square_equation(n) для x^2 - 2x + 3 
 # выдает ((1+1.4142135623730951j), (0.9999999999999999-1.4142135623730951j)), округлить не получается
 def square_equation(n):
-    a = n[0]
-    b = n[1]
-    c = n[2]
+    a, b, c = n[0], n[1], n[2]
     D = round(b**2 - (4 * a * c), 5)
     # опустил проверку D>0, D<0, D == 0, чтобы считать и мнимые числа
     x1 = +(D**0.5 / (2 * a)) - round((b / (2 * a)), 5)
@@ -116,9 +117,7 @@ def square_equation(n):
 
 # enter cmath (вывод комплексных чисел)
 def square_equation_library(n):
-    a = n[0]
-    b = n[1]
-    c = n[2]
+    a, b, c = n[0], n[1], n[2]
     D = round(b**2 - (4*a*c), 5)
     x1 = +(sqrt(D) / (2*a)) - round((b / (2*a)), 5)
     x2 = -(sqrt(D) / (2*a)) - round((b / (2*a)), 5)
@@ -135,6 +134,7 @@ def call_program(task, value_list):
     call = {
         11: crt_arr_base_on_three,
         12: crt_dic_with_N,
+        13: count_string_values,
         14: sum_of_real_numb,
         15: fill_miltiple,
         16: crt_dic_with_N2,
@@ -158,4 +158,6 @@ def call_program(task, value_list):
 a = [[4,5,7], 4]
 b = [1,2,3,4,5,6,7]
 c = [1.1, 1.01, 1.001]
-call_program(27, "25,17,31")
+v13 = ["25,17,31,25", '31']
+v24 = [1.1, 1.2, 3.1, 5, 10.01]
+call_program(24, v24)
