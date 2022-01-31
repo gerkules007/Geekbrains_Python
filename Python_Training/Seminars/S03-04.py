@@ -126,6 +126,12 @@ def square_equation_library(n):
     x2 = -(sqrt(D) / (2*a)) - round((b / (2*a)), 5)
     return (x1, x2)
 
+# 29 Найти НОК двух чисел # smallest common multiple
+def scm(n):
+    n1, n2 = n[0], n[1]
+    x = math.gcd(n1,n2)
+    return int((n1*n2)/x)
+
 # 30 Вычислить число pi c заданной точностью d
 # был вариант math.pi // n * n, но не давал точного знака при умножении n
 def pi_number(n):
@@ -155,6 +161,7 @@ def call_program(task, value_list):
         27: min_max_string,
         28: square_equation,
         28.1: square_equation_library,
+        29: scm,
         30: pi_number
     }
     print(call[task](value_list))
@@ -165,4 +172,4 @@ c = [1.1, 1.01, 1.001]
 v13 = ["25,17,31,25", '31']
 v24 = [1.1, 1.2, 3.1, 5, 10.01]
 v28 = [1, -2, 3]
-call_program(17, 5)
+call_program(29, [30,6])
