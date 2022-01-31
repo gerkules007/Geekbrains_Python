@@ -94,10 +94,12 @@ def binary_parse2(n): return bin(n)[2:]
 
 # 26 Дано число. Составить список чисел Фибоначчи, в том числе для отрицательных индексов
 def fibonacci(n):
-    return fibonacci(n-2) + fibonacci(n-1) if n > 2 else 1
+    if n == 1 or n == 2: return 1
+    elif n == 0: return 0
+    else: return fibonacci(n-2) + fibonacci(n-1)
 
 def fill_fibonacci(n):
-    return {i: fibonacci(i) for i in range(1, abs(n)+1)} if n > 0 else {-i: -fibonacci(i) for i in range(1, abs(n)+1)}
+    return [fibonacci(i) if i >= 0 else ((-1)**(-i+1))*fibonacci(-i) for i in range(-n, n+1) ]
 
 # 27 Строка содержит набор чисел. Показать большее и меньшее число
 def min_max_string(n, splitter = ','):
@@ -138,6 +140,9 @@ def pi_number(n):
     x = abs(int(math.log10(n)))
     return round(math.pi, x)
 
+# 31 Составить список простых множителей натурального числа N
+
+
 
 def call_program(task, value_list):
     call = {
@@ -172,4 +177,4 @@ c = [1.1, 1.01, 1.001]
 v13 = ["25,17,31,25", '31']
 v24 = [1.1, 1.2, 3.1, 5, 10.01]
 v28 = [1, -2, 3]
-call_program(29, [30,6])
+call_program(26,10)
