@@ -2,6 +2,7 @@ import random
 from cmath import sqrt
 import math
 import time
+from timeit import timeit
 # 11 Для натурального N создать множество: 1, -3, 9, -27, 81 и т.д.
 def crt_arr_base_on_three(n):
     return [(-3)**i for i in range(n+1)]
@@ -140,10 +141,31 @@ def pi_number(n):
     return round(math.pi, x)
 
 # 31 Составить список простых множителей натурального числа N
-
+def prime_multy_list(n):
+    if n == 1: return [1]
+    prime = [1,2]
+    if n == 2: return prime
+    else:
+        result = []
+        for k in range(3, n//2 + 1): # чтобы найти простые делители числа, не нужно искать дальше n/2
+            b = True
+            for i in prime[1:]: # число, которое не делится ни на одно простое число является простым
+                if int(k**0.5) < i: break # из списка простых чисел нет большего, чем квадрат проверяемого числа
+                if k%i == 0: 
+                    b = False
+                    break
+            if b:
+                prime.append(k)
+                if n%k == 0: 
+                    result.append(k)
+                    if n/k == result[0]: break # дальше нет смысла перебирать: вводное число при делении на k дает первое простое число ряда 10001/137 == 73 10001: [73,137]
+    print(int(n**0.5+1))
+    return result
+            
 
 
 def call_program(task, value_list):
+    start_t = time.time()
     call = {
         11: crt_arr_base_on_three,
         12: crt_dic_with_N,
@@ -166,9 +188,11 @@ def call_program(task, value_list):
         28: square_equation,
         28.1: square_equation_library,
         29: scm,
-        30: pi_number
+        30: pi_number,
+        31: prime_multy_list,
     }
     print(call[task](value_list))
+    print(f'Result timer: {round(time.time() - start_t, 4)} sec')
 
 a = [[4,5,7], 4]
 b = [1,2,3,4,5,6,7]
@@ -176,4 +200,4 @@ c = [1.1, 1.01, 1.001]
 v13 = ["25,17,31,25", '31']
 v24 = [1.1, 1.2, 3.1, 5, 10.01]
 v28 = [1, -2, 3]
-call_program(26,10)
+call_program(31,2000001)
