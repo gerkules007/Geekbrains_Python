@@ -64,9 +64,8 @@ def randomize_it(n):
 def find_number(n): return n[1] in n[0]
 
 # 21 Определить, позицию второго вхождения строки в списке либо сообщить, что его нет.
-# Не понятно условие...
-# def find_string_element(n: list):
-#     return (n[n.index('\n') + 1:])
+def find_string_element(n: list):
+    return (n[n.index('\n') + 1:])
 
 # 22 Найти сумму чисел списка стоящих на нечетной позиции
 def sum_not_even_numbers(n): 
