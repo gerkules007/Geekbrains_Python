@@ -143,8 +143,15 @@ def pi_number(n):
     x = abs(int(math.log10(n)))
     return round(math.pi, x)
 
+def pi_number2(n):
+    fmt = format(n, 'e')[10:]
+    nw = int(str(fmt))
+    return round(math.pi, nw)
+    # return round(math.pi, int(str(format(n, 'e')[10:])))
+
 # 31 Составить список простых множителей натурального числа N
 def prime_multy_list(n):
+    print(f'N = {n}')
     prime = [2]
     end = int(n**0.5)+1
     result = []
@@ -193,6 +200,7 @@ def call_program(task, value_list):
         28.1: square_equation_library,
         29: scm,
         30: pi_number,
+        30.1: pi_number2,
         31: prime_multy_list,
     }
     print(call[task](value_list))
@@ -205,4 +213,4 @@ v13 = ["25,17,31,25", '31']
 v24 = [1.1, 1.2, 3.1, 5, 10.01]
 v28 = [1, -2, 3]
 
-call_program(31.1,987654321)
+call_program(30.1,0.00001)
