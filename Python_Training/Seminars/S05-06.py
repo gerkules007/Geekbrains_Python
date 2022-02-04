@@ -1,3 +1,4 @@
+from ast import keyword
 import time
 import random
 from functools import *
@@ -49,6 +50,7 @@ def create_square_equation(k, min = 0, max = 1, s = '', l : list = []):
 
 # 35 В файле находится N натуральных чисел, записанных через пробел. 
 # Среди чисел не хватает одного, чтобы выполнялось условие A[i] - 1 = A[i-1]. Найти его.
+# Было добавлена перезапись файла с восстановлением последовательности
 def find_number_for_r(l):
     l = list(map(int, open("Python_Training\\Seminars\\xfile.txt", 'r').read().split(' ')))
     for i in range(1,len(l)):
@@ -62,16 +64,38 @@ def find_number_for_r(l):
 
 # 36 Дан список чисел. Выделить среди них числа, удовлетворяющие условию: следующее больше предыдущего. 
 # Пример: [1, 5, 2, 3, 4, 6, 1, 7] => [1, 2, 3] или [1, 7] или [1, 6, 7] и т.д.
+# def many_lists(l, nl = []):
+#     for i in range(len(l)):
+#         temp = []
+#         for j in range(i+1, len(l)-1):
+#             temp.append(l[j])
+#             for k in range(i+1, j):
+#                 if l[k] < l[k+1]: temp.append(l[k])
+#             nl.append(temp)
+#     return nl
 
 # 37 Дан список чисел. Выделить среди них максимальное количество чисел, 
 # удовлетворяющих условию предыдущей задачи. Пример: [1, 5, 2, 3, 4, 6, 1, 7] => [1, 2, 3, 4, 6, 7]
+
+# 38 Напишите программу, удаляющую из текста все слова содержащие "абв".
+def del_text(l: str):
+    with open("Python_Training\\Seminars\\xfile.txt", 'r') as f:
+        x = f.read().replace(l, '')
+    with open("Python_Training\\Seminars\\xfile.txt", 'w') as f:
+        f.write(x)
+    return 'Delete done'
 
 # 42 Реализовать RLE алгоритм. реализовать модуль сжатия и восстановления данных.
 # входные и выходные данные хранятся в отдельных файлах
 
 # 43 Дана последовательность чисел. Получить список уникальных элементов заданной последовательности.
 # Пример: [1, 2, 3, 5, 1, 5, 3, 10] => [2, 10]
-
+def lonely_elements(l):
+    nw = {i: 0 for i in l}
+    for i in range(len(l)):
+        if l[i] in nw: 
+            nw[l[i]] += 1
+    return [i for i in list(nw.keys()) if nw[i] == 1]
 
 def call_program(task, value_list):
     start_t = time.time()
@@ -79,10 +103,17 @@ def call_program(task, value_list):
         32: unique_elements,
         33: create_square_equation,
         35: find_number_for_r,
+        36: many_lists,
+        38: del_text,
+        43: lonely_elements
     }
     print(call[task](value_list))
     print(f'Result timer: {round(time.time() - start_t, 4)} sec')
 
 v32 = [4,5,7,4,4,5,5,7]
+v36 = [1, 5, 2, 3, 4, 6, 1, 7]
+test = [1,2,3,4]
+txt = 'ab'
+v43 = [1, 2, 3, 5, 1, 5, 3, 10]
 
-call_program(35, v32)
+call_program(43, v43)
