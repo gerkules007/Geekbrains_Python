@@ -1,4 +1,3 @@
-from ast import keyword
 import time
 import random
 from functools import *
@@ -10,43 +9,47 @@ def unique_elements(l):
 # 33 Задана натуральная степень k. Сформировать случайным образом список коэффициентов 
 # (значения от 0 до 100) многочлена и записать в файл многочлен степени k. 
 # *Пример: k=2 => 2*x² + 4*x + 5 = 0 или x² + 5 = 0 или 10*x² = 0
-def create_square_equation(k, min = 0, max = 1, s = '', l : list = []):
-    d = [random.randint(min, max) for _ in range(k)]
-    if k >= 2: 
-        for i in range(2, len(d)):
-            if d[i] != 0:
-                l.append(str(d[i]) + '*x^' + str(i))
-    if d[1] != 0: l.append(str(d[1]) + '*x')
-    if d[0] != 0: l.append(str(d[0]))
-    for i in l[:-1]: 
-        s += i + ' + '
-    z = type(reduce(lambda x,y: x + y, l[:-1]))
-    s += l[-1] + ' = 0'
-    open("Python_Training\\Seminars\\xfile.txt", 'w').write(s)
+def create_square_equation(k, min = 0, max = 1, s = None):
+    d = {i: random.randint(min, max) for i in range(k, -1, -1)}
+    d[0] = None if d[0] == 0 else str(d[0])
+    for i in range(1, len(d)):
+        if d[i] > 1: 
+            d[i] = str(d[i]) + '*x'
+        elif d[i] == 1:
+            d[i] = 'x'
+        else: d[i] = None
+    for i in range(2, len(d)):
+        if d[i] != None:
+            d[i] = d[i] + '^' + str(i)
+    # print(d)
+    s = " + ".join([d[i] for i in d.keys() if d[i] != None]) + ' = 0'
+    # print(s)
+    try:
+        open("Python_Training\\Seminars\\xfile.txt", 'w').write(s)
+        return 'Done'
+    except Exception:
+        return 'Don\'t write file'
 
-    # if k >= 2:
-    #     for i in range(2, k):
-    #         l.append(str(random.randint(min, max)) + '*x^' + str(i))
-    # if d[1] != 0: l.append(str(d[1]) + '*x')
-    # if d[0] != 0: l.append(str(d[0]))
-    # for i in l[:-1]: s += i + ' + '
-    # s += l[-1] + ' = 0'
+# 34* Даны два файла в каждом из которых находится запись многочлена. Сформировать файл содержащий сумму многочленов.
+def merge_square_equation(l, s = ''):
+    path1, path2 = l[0], l[1]
+    f1 = open(path1, 'r').read().split(' ')
+    f2 = open(path2, 'r').read().split(' ')
+    delete_chars = ['=', '0', '+']
+    f = list(filter(lambda x: not x in delete_chars, f1)) + \
+        list(filter(lambda x: not x in delete_chars, f2))
+    s = calculate_square_equation(f)
+    # s = " + ".join([i for i in fs]) + ' = 0'
+    # try:
+    #     open("Python_Training\\Seminars\\xfile.txt", 'w').write(s)
+    #     return 'Done'
+    # except Exception:
+    #     return 'Don\'t write file'
+    return s
 
-    # max = random.randint(min, max+1)
-    # if k == 0 or max == 0: return '0'
-    # s = ''
-    # while k > 0 or max < 0:
-    #     r = random.randint(min, max)
-    #     if r != 0:
-    #         max -= r
-    #         if k > 1: s = str(r) + '*x^' + str(k) + ' + '
-    #         else: s += str(r) + '*x + '
-    #     k -= 1
-    # if max != 0: s += str(max) + ' = 0'
-    # else: s = s[:-2] + '= 0'
-    return 'Done'
-
-# 34 Даны два файла в каждом из которых находится запись многочлена. Сформировать файл содержащий сумму многочленов.
+def calculate_square_equation(m):
+    d1 = {x[x.index('^')+1]: x[:x.index('x')] for x in m if '^' in x}
+    return d1
 
 # 35 В файле находится N натуральных чисел, записанных через пробел. 
 # Среди чисел не хватает одного, чтобы выполнялось условие A[i] - 1 = A[i-1]. Найти его.
@@ -64,18 +67,31 @@ def find_number_for_r(l):
 
 # 36 Дан список чисел. Выделить среди них числа, удовлетворяющие условию: следующее больше предыдущего. 
 # Пример: [1, 5, 2, 3, 4, 6, 1, 7] => [1, 2, 3] или [1, 7] или [1, 6, 7] и т.д.
-# def many_lists(l, nl = []):
-#     for i in range(len(l)):
-#         temp = []
-#         for j in range(i+1, len(l)-1):
-#             temp.append(l[j])
-#             for k in range(i+1, j):
-#                 if l[k] < l[k+1]: temp.append(l[k])
-#             nl.append(temp)
-#     return nl
+# Порядок элементов менять нельзя
+def many_lists(l, nl = []):
+    for j in range(len(l)-1):
+        temp = []
+        temp.append(l[j])
+        for i in range(j+1, len(l)):
+            if l[j] < l[i]:
+                if temp[len(temp)-1] < l[i]:
+                    temp.append(l[i])
+                    new_temp = tuple(temp)
+                    nl.append(list(new_temp))
+                else:
+                    temp.pop()
+                    temp.append(l[i])
+                    new_temp = tuple(temp)
+                    nl.append(list(new_temp))
+    return nl
 
-# 37 Дан список чисел. Выделить среди них максимальное количество чисел, 
+# 37* Дан список чисел. Выделить среди них максимальное количество чисел, 
 # удовлетворяющих условию предыдущей задачи. Пример: [1, 5, 2, 3, 4, 6, 1, 7] => [1, 2, 3, 4, 6, 7]
+# Порядок элементов менять нельзя
+def max_many_lists(l):
+    nl = many_lists(l)
+    k = max([(len(n), i) for i, n in enumerate(nl)])
+    return nl[k[1]]
 
 # 38 Напишите программу, удаляющую из текста все слова содержащие "абв".
 def del_text(l: str):
@@ -84,6 +100,16 @@ def del_text(l: str):
     with open("Python_Training\\Seminars\\xfile.txt", 'w') as f:
         f.write(x)
     return 'Delete done'
+
+# 39 Создать игру с конфетами
+# НАХОДИТСЯ В ФАЙЛЕ 39_candy_game
+
+# 40* Вы когда-нибудь играли в игру "Крестики-нолики"? Попробуйте создать её.
+# НАХОДИТСЯ В ФАЙЛЕ 40_cross_zero
+
+# 41* Написать программу вычисления арифметического выражения заданного строкой. Используются операции +,-,/,*. 
+# приоритет операций стандартный. Пример: 2+2 => 4; 1+2*3 => 7; 1-2*3 => -5; 
+# Добавить возможность использования скобок, меняющих приоритет операций. Пример: 1+2*3 => 7; (1+2)*3 => 9;
 
 # 42 Реализовать RLE алгоритм. реализовать модуль сжатия и восстановления данных.
 # входные и выходные данные хранятся в отдельных файлах
@@ -102,10 +128,13 @@ def call_program(task, value_list):
     call = {
         32: unique_elements,
         33: create_square_equation,
+        34: calculate_square_equation,
+        34.1: merge_square_equation,
         35: find_number_for_r,
         36: many_lists,
+        37: max_many_lists,
         38: del_text,
-        43: lonely_elements
+        43: lonely_elements,
     }
     print(call[task](value_list))
     print(f'Result timer: {round(time.time() - start_t, 4)} sec')
@@ -115,5 +144,5 @@ v36 = [1, 5, 2, 3, 4, 6, 1, 7]
 test = [1,2,3,4]
 txt = 'ab'
 v43 = [1, 2, 3, 5, 1, 5, 3, 10]
-
-call_program(43, v43)
+v34 = ["Python_Training\\Seminars\\xfile.txt", "Python_Training\\Seminars\\xfile2.txt"]
+call_program(37, v36)
