@@ -11,6 +11,6 @@ def create(device = 1):
         .format(style, pressure_view(device))
     html += ' </body>\n</html>\n'
 
-    with open('index.html', 'w') as page:
+    with open('Python_Training/Lections/Modules/index.html', 'w') as page:
         page.write(html)
     return html
