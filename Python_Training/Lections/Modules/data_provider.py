@@ -9,5 +9,5 @@ def get_pressure(sensor):
 def get_wind_speed(sensor):
     return randint(0,30) if sensor else randint(30,50)
 
-def data_collection():
-    return (get_temperature(), get_wind_speed(), get_pressure())
+def data_collection(sensor = 1):
+    return (get_temperature(sensor), get_wind_speed(sensor), get_pressure(sensor))
