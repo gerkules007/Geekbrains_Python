@@ -110,9 +110,40 @@ def del_text(l: str):
 # 41* Написать программу вычисления арифметического выражения заданного строкой. Используются операции +,-,/,*. 
 # приоритет операций стандартный. Пример: 2+2 => 4; 1+2*3 => 7; 1-2*3 => -5; 
 # Добавить возможность использования скобок, меняющих приоритет операций. Пример: 1+2*3 => 7; (1+2)*3 => 9;
+def calc_string_expression(s: str):
+    try:
+        return eval(s)
+    except Exception:
+        print('Error reading string expression')
+        return 0
 
 # 42 Реализовать RLE алгоритм. реализовать модуль сжатия и восстановления данных.
 # входные и выходные данные хранятся в отдельных файлах
+def rle_get(d, byte = 256):
+    count, s = 1, ''
+    try:
+        f = open(d[0], 'r').read()
+        new_char = f[0]
+        for i in range(1,len(f)):
+            if new_char != f[i]:
+                s += str(count) + new_char
+                count = 1
+                new_char = f[i]
+            else:
+                count += 1
+                if byte < count:
+                    s += str(count) + new_char
+                    count = 1
+                    continue
+        s += str(count) + new_char  
+        if len(f) <= len(s): s = f
+        with open(d[1], 'w') as f2:
+            f2.write(s)
+    except Exception:
+        return 'Error compilation'
+    else:
+        return 'Done'
+
 
 # 43 Дана последовательность чисел. Получить список уникальных элементов заданной последовательности.
 # Пример: [1, 2, 3, 5, 1, 5, 3, 10] => [2, 10]
@@ -134,6 +165,8 @@ def call_program(task, value_list):
         36: many_lists,
         37: max_many_lists,
         38: del_text,
+        41: calc_string_expression,
+        42: rle_get,
         43: lonely_elements,
     }
     print(call[task](value_list))
@@ -144,5 +177,6 @@ v36 = [1, 5, 2, 3, 4, 6, 1, 7]
 test = [1,2,3,4]
 txt = 'ab'
 v43 = [1, 2, 3, 5, 1, 5, 3, 10]
-v34 = ["Python_Training\\Seminars\\xfile.txt", "Python_Training\\Seminars\\xfile2.txt"]
-call_program(37, v36)
+v34_41 = ["Python_Training\\Seminars\\xfile.txt", "Python_Training\\Seminars\\xfile2.txt"]
+v41 = '((4-2)*(1+3))/10'
+call_program(42, v34_41)
