@@ -1,7 +1,7 @@
 from data_provider import data_collection
 
-def create_collection():
-    t, w, p = data_collection()
+def create_collection(data):
+    t, w, p = data
     xml = '<xml>\n'
     xml += '    <temperature units = "C">{}</temperature>\n'\
         .format(t)
@@ -9,7 +9,7 @@ def create_collection():
         .format(w)
     xml += '    <pressure units = "mmHg">{}</pressure>\n'\
         .format(p)
-    xml = '</xml>\n'
+    xml += '</xml>\n'
 
     with open('Python_Training/Lections/Modules/index1.xml', 'w') as page:
         page.write(xml)
