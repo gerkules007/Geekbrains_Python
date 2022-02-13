@@ -6,10 +6,11 @@ def create(device = 1):
     html += '   <p {}>Temperature: {} c</p>\n'\
         .format(style, temperature_view(device))
     html += '   <p {}>Wind_speed: {} m/s</p>\n'\
-        .format(style, temperature_view(device)) 
+        .format(style, wind_speed_view(device)) 
     html += '   <p {}>Pressure: {} mmHg</p>\n'\
-        .format(style, temperature_view(device))
+        .format(style, pressure_view(device))
     html += ' </body>\n</html>\n'
 
     with open('index.html', 'w') as page:
         page.write(html)
+    return html
