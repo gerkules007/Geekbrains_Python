@@ -67,7 +67,15 @@ def randomize_it(n):
 # 20 Определить, присутствует ли в заданном списке строк, некоторое число
 def find_number(n): return n[1] in n[0]
 
-# 21 Определить, позицию второго вхождения строки в списке либо сообщить, что его нет.
+# 21 TODO Переделать
+# Определить, позицию второго вхождения строки в списке либо сообщить, что его нет.
+# Определить, позицию второго вхождения строки в списке либо сообщить, что её нет.
+# Примеры
+# список: ["qwe", "asd", "zxc", "qwe", "ertqwe"], ищем: "qwe", ответ: 3
+# список: ["йцу", "фыв", "ячс", "цук", "йцукен", "йцу"], ищем: "йцу", ответ: 5
+# список: ["йцу", "фыв", "ячс", "цук", "йцукен"], ищем: "йцу", ответ: -1
+# список: ["123", "234", 123, "567"], ищем: "123", ответ: -1
+# список: [], ищем: "123", ответ: -1
 def find_string_element(n: list):
     return (n[n.index('\n') + 1:])
 
@@ -143,29 +151,37 @@ def pi_number(n):
     x = abs(int(math.log10(n)))
     return round(math.pi, x)
 
+def pi_number2(n):
+    fmt = format(n, 'e')[10:]
+    nw = int(str(fmt))
+    return round(math.pi, nw)
+    # return round(math.pi, int(str(format(n, 'e')[10:])))
+
 # 31 Составить список простых множителей натурального числа N
 def prime_multy_list(n):
-    if n == 1: return [1]
-    prime = [1,2]
-    if n == 2: return prime
-    else:
-        result = []
-        for k in range(3, n//2 + 1): # чтобы найти простые делители числа, не нужно искать дальше n/2
-            b = True
-            for i in prime[1:]: # число, которое не делится ни на одно простое число является простым
-                if int(k**0.5) < i: break # из списка простых чисел нет большего, чем квадрат проверяемого числа
-                if k%i == 0: 
-                    b = False
+    print(f'N = {n}')
+    prime = [2]
+    end = int(n**0.5)+1
+    result = []
+    while n != 1:
+        p = prime[-1]
+        while n % p != 0:
+            p += 1
+            while p < end:
+                b = True
+                for i in prime:
+                    if p%i == 0:
+                        b = False
+                        break
+                if b:
+                    prime.append(p)
+                    # print(f'k {p}')
                     break
-            if b:
-                prime.append(k)
-                if n%k == 0: 
-                    result.append(k)
-                    if n/k == result[0]: break # вводное число при делении на k дает первое простое число ряда 10001/137 == 73 10001: [73,137]
-    print(int(n**0.5+1))
+                p += 1
+        result.append(p)
+        n //= p
+        # print(f'n {n}')
     return result
-            
-
 
 def call_program(task, value_list):
     start_t = time.time()
@@ -192,6 +208,7 @@ def call_program(task, value_list):
         28.1: square_equation_library,
         29: scm,
         30: pi_number,
+        30.1: pi_number2,
         31: prime_multy_list,
     }
     print(call[task](value_list))
@@ -204,4 +221,4 @@ v13 = ["25,17,31,25", '31']
 v24 = [1.1, 1.2, 3.1, 5, 10.01]
 v28 = [1, -2, 3]
 
-call_program(19,[5,3])
+call_program(30.1,0.00001)
